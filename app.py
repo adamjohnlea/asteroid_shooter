@@ -9,12 +9,16 @@ pygame.display.set_caption("-= ASTEROID SHOOTER =-")
 clock = pygame.time.Clock()
 
 # Importing images. Images are also Surfaces
+# Ship
 ship_surf = pygame.image.load('./graphics/ship.png').convert_alpha()
+ship_rect = ship_surf.get_rect(center=(WINDOW_WIDTH/2, WINDOW_HEIGHT - 70))
+
 background_surf = pygame.image.load('./graphics/background.png').convert()
 
 # Import text. Text is also a Surface
 font = pygame.font.Font('./graphics/subatomic.ttf', 50)
 text_surf = font.render('Score: ', True, 'white')
+text_rect = text_surf.get_rect(midright=(WINDOW_WIDTH, font.get_height()))
 
 # Game Loop
 while True:
@@ -28,10 +32,12 @@ while True:
 
     # 2 - Updates
     display_surface.fill('black')
-    # blit always places top/left of a surface. The top/left corner of the display_surface is (0,0)
     display_surface.blit(background_surf, (0, 0))
-    display_surface.blit(ship_surf, (300, 500))
-    display_surface.blit(text_surf, (WINDOW_WIDTH - (text_surf.get_width()+120), 20))
+
+    if ship_rect.top > 8:
+        ship_rect.y -= 4
+    display_surface.blit(ship_surf, ship_rect)
+    display_surface.blit(text_surf, text_rect)
 
     # 3 - Update display surface
     pygame.display.update()
