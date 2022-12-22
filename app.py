@@ -5,6 +5,8 @@ pygame.init()
 WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
 display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("-= ASTEROID SHOOTER =-")
+# Create Clock that can be used to limit the framerate
+clock = pygame.time.Clock()
 
 # Importing images. Images are also Surfaces
 ship_surf = pygame.image.load('./graphics/ship.png').convert_alpha()
@@ -21,6 +23,8 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+    # Use created clock to limit framerate to 60 FPS
+    clock.tick(60)
 
     # 2 - Updates
     display_surface.fill('black')
