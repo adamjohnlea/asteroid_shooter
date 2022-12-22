@@ -10,7 +10,7 @@ pygame.display.set_caption("-= ASTEROID SHOOTER =-")
 ship_surf = pygame.image.load('./graphics/ship.png').convert_alpha()
 background_surf = pygame.image.load('./graphics/background.png').convert()
 
-# Create text. Text is also a Surface
+# Import text. Text is also a Surface
 font = pygame.font.Font('./graphics/subatomic.ttf', 50)
 text_surf = font.render('Score: ', True, 'white')
 
