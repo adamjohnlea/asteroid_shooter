@@ -25,7 +25,7 @@ pygame.display.set_caption("-= ASTEROID SHOOTER =-")
 clock = pygame.time.Clock()
 
 # Background
-background_surf = pygame.image.load('./graphics/background.png').convert()
+background_surf = pygame.image.load('./graphics/background_new.png').convert()
 
 # Title
 font = pygame.font.Font('./graphics/subatomic.ttf', 30)
@@ -36,11 +36,11 @@ title_rect = title_surf.get_rect(midleft=(0, font.get_height()))
 font = pygame.font.Font('./graphics/subatomic.ttf', 30)
 
 # Ship
-ship_surf = pygame.image.load('./graphics/ship.png').convert_alpha()
+ship_surf = pygame.image.load('./graphics/ship_4.png').convert_alpha()
 ship_rect = ship_surf.get_rect(center=(WINDOW_WIDTH/2, WINDOW_HEIGHT - 70))
 
 # Laser
-laser_surf = pygame.image.load('./graphics/laser.png').convert_alpha()
+laser_surf = pygame.image.load('./graphics/laser_2.png').convert_alpha()
 laser_list = []
 
 # Laser timer
