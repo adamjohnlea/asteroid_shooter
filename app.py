@@ -55,6 +55,13 @@ asteroid_list = []
 asteroid_timer = pygame.event.custom_type()
 pygame.time.set_timer(asteroid_timer, 500)
 
+# Sound
+laser_sound = pygame.mixer.Sound('./sounds/laser.ogg')
+explosion_sound = pygame.mixer.Sound('./sounds/explosion.wav')
+background_sound = pygame.mixer.Sound('./sounds/music.wav')
+background_sound.play(loops=-1)
+background_sound.set_volume(0.2)
+
 # Game Loop
 while True:
     # Input -> events (mouse click, button press, etc)
@@ -77,6 +84,9 @@ while True:
                 # Timer
                 can_shoot = False
                 shoot_time = pygame.time.get_ticks()
+
+                # Laser sound
+                laser_sound.play()
 
         if event.type == asteroid_timer:
             x_pos = randint(-100, WINDOW_WIDTH+100)
@@ -111,6 +121,8 @@ while True:
     for asteroid_tuple in asteroid_list:
         for laser in laser_list:
             if laser.colliderect(asteroid_tuple[0]):
+                # Explosion sound
+                explosion_sound.play()
                 laser_list.remove(laser)
                 asteroid_list.remove(asteroid_tuple)
 
