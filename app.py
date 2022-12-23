@@ -1,5 +1,6 @@
 import pygame
 import sys
+from random import randint, uniform
 
 
 def display_score():
@@ -46,6 +47,14 @@ laser_list = []
 can_shoot = True
 shoot_time = None
 
+# Asteroid
+asteroid_surf = pygame.image.load('./graphics/meteor.png').convert_alpha()
+asteroid_list = []
+
+# Asteroid timer
+asteroid_timer = pygame.event.custom_type()
+pygame.time.set_timer(asteroid_timer, 500)
+
 # Game Loop
 while True:
     # Input -> events (mouse click, button press, etc)
@@ -68,6 +77,13 @@ while True:
                 # Timer
                 can_shoot = False
                 shoot_time = pygame.time.get_ticks()
+
+        if event.type == asteroid_timer:
+            x_pos = randint(-100, WINDOW_WIDTH+100)
+            y_pos = randint(-100, -50)
+            asteroid_rect = asteroid_surf.get_rect(center=(x_pos, y_pos))
+            direction = pygame.math.Vector2(uniform(-0.5, 0.5), 1)
+            asteroid_list.append((asteroid_rect, direction))
 
     # Framerate limit
     dt = clock.tick(120) / 1000
@@ -94,6 +110,15 @@ while True:
         rect.y -= round(laser_speed * dt)
         if rect.bottom < 0:
             laser_list.remove(rect)
+
+    asteroid_speed = 400
+    for asteroid_tuple in asteroid_list:
+        direction = asteroid_tuple[1]
+        asteroid_rect = asteroid_tuple[0]
+        display_surface.blit(asteroid_surf, asteroid_rect)
+        asteroid_rect.center += direction * asteroid_speed * dt
+        if asteroid_rect.top > WINDOW_HEIGHT:
+            asteroid_list.remove(asteroid_tuple)
 
     # Draw final frame
     pygame.display.update()
