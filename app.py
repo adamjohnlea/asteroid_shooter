@@ -10,9 +10,14 @@ clock = pygame.time.Clock()
 # Background
 background_surf = pygame.image.load('./graphics/background.png').convert()
 
+# Title
+font = pygame.font.Font('./graphics/subatomic.ttf', 30)
+title_surf = font.render('-= ASTEROID SHOOTER =-', True, 'white')
+title_rect = title_surf.get_rect(midleft=(0, font.get_height()))
+
 # Score
-font = pygame.font.Font('./graphics/subatomic.ttf', 50)
-text_surf = font.render('Score: ', True, 'white')
+font = pygame.font.Font('./graphics/subatomic.ttf', 30)
+text_surf = font.render('SCORE: ', True, 'white')
 text_rect = text_surf.get_rect(midright=(WINDOW_WIDTH, font.get_height()))
 
 # Ship
@@ -46,6 +51,8 @@ while True:
 
     # Mouse input
     # ship_rect.center = pygame.mouse.get_pos()
+
+    # Animate laser
     laser_rect.y -= 4
 
     # Updates
@@ -54,6 +61,7 @@ while True:
     display_surface.blit(laser_surf, laser_rect)
     display_surface.blit(ship_surf, ship_rect)
     display_surface.blit(text_surf, text_rect)
+    display_surface.blit(title_surf, title_rect)
 
-    # 3 - Update display surface
+    # Draw final frame
     pygame.display.update()
