@@ -43,7 +43,7 @@ while True:
                 pygame.quit()
                 sys.exit()
 
-        if event.type == pygame.KEYDOWN:  # 0.5 secs of delay betwen shots
+        if event.type == pygame.KEYDOWN:  # 0.5 secinds of delay before we can shoot again
             if event.key == pygame.K_SPACE:
                 laser_rect = laser_surf.get_rect(midbottom=ship_rect.midtop)
                 laser_list.append(laser_rect)
