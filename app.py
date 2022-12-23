@@ -100,6 +100,20 @@ while True:
     display_surface.blit(ship_surf, ship_rect)
     display_surface.blit(title_surf, title_rect)
 
+    # Asteroid/Ship collisons
+    for asteroid_tuple in asteroid_list:
+        asteroid_rect = asteroid_tuple[0]
+        if ship_rect.colliderect(asteroid_rect):
+            pygame.quit()
+            sys.exit()
+
+    # Laser/Asteroid collions -> two for loops. 1 for asteroids, 1 for laser
+    for asteroid_tuple in asteroid_list:
+        for laser in laser_list:
+            if laser.colliderect(asteroid_tuple[0]):
+                laser_list.remove(laser)
+                asteroid_list.remove(asteroid_tuple)
+
     # Score
     display_score()
 
