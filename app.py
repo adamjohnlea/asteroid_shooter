@@ -53,7 +53,7 @@ while True:
     # ship_rect.center = pygame.mouse.get_pos()
 
     # Animate laser
-    laser_rect.y -= 4
+    # laser_rect.y -= 4
 
     # Updates
     display_surface.fill('black')
