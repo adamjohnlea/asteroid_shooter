@@ -26,7 +26,8 @@ ship_rect = ship_surf.get_rect(center=(WINDOW_WIDTH/2, WINDOW_HEIGHT - 70))
 
 # Laser
 laser_surf = pygame.image.load('./graphics/laser.png').convert_alpha()
-laser_rect = laser_surf.get_rect(midbottom=ship_rect.midtop)
+laser_list = []
+# laser_rect = laser_surf.get_rect(midbottom=ship_rect.midtop)
 
 # Game Loop
 while True:
@@ -42,26 +43,32 @@ while True:
                 pygame.quit()
                 sys.exit()
 
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYDOWN:  # 0.5 secs of delay betwen shots
             if event.key == pygame.K_SPACE:
-                print("shoot")
+                laser_rect = laser_surf.get_rect(midbottom=ship_rect.midtop)
+                laser_list.append(laser_rect)
+                print(laser_list)
 
     # Framerate limit
     dt = clock.tick(120) / 1000
 
     # Mouse input
-    # ship_rect.center = pygame.mouse.get_pos()
-
-    # Animate laser
-    laser_rect.y -= round(200 * dt)
+    ship_rect.center = pygame.mouse.get_pos()
 
     # Updates
     display_surface.fill('black')
     display_surface.blit(background_surf, (0, 0))
-    display_surface.blit(laser_surf, laser_rect)
     display_surface.blit(ship_surf, ship_rect)
     display_surface.blit(text_surf, text_rect)
     display_surface.blit(title_surf, title_rect)
+
+    # for loop that draws laser surface where the rects are
+    laser_speed = 300
+    for rect in laser_list:
+        display_surface.blit(laser_surf, rect)
+        rect.y -= round(laser_speed * dt)
+        if rect.bottom < 0:
+            laser_list.remove(rect)
 
     # Draw final frame
     pygame.display.update()
