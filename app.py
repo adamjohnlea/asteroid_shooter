@@ -47,13 +47,13 @@ while True:
                 print("shoot")
 
     # Framerate limit
-    clock.tick(60)
+    dt = clock.tick(120) / 1000
 
     # Mouse input
     # ship_rect.center = pygame.mouse.get_pos()
 
     # Animate laser
-    # laser_rect.y -= 4
+    laser_rect.y -= round(200 * dt)
 
     # Updates
     display_surface.fill('black')
